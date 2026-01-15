@@ -8,6 +8,10 @@ on:
   # 2. Manual Trigger: Adds a "Run Now" button in GitHub for testing
   workflow_dispatch:
 
+# Grant permission to write back to the repo (for self-healing registry)
+permissions:
+  contents: write
+
 jobs:
   run-pipeline:
     runs-on: ubuntu-latest
@@ -35,3 +39,19 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python ingest.py
+
+      # Step E: Save "Self-Healing" Updates
+      # If the registry updated (e.g. marked coins inactive), commit it back.
+      - name: Commit Registry Updates
+        run: |
+          git config --global user.name "Market Sentinel Bot"
+          git config --global user.email "bot@marketsentinel.local"
+          
+          # Check if coin_registry.json changed
+          if [[ `git status --porcelain coin_registry.json` ]]; then
+            git add coin_registry.json
+            git commit -m "auto-heal: update coin registry status [skip ci]"
+            git push
+          else
+            echo "No registry changes to save."
+          fi
