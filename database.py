@@ -25,7 +25,7 @@ def init_db():
     CREATE TABLE IF NOT EXISTS market_data (
         id SERIAL PRIMARY KEY,
         coin_id VARCHAR(255) NOT NULL,
-        symbol VARCHAR(20) NOT NULL,
+        symbol VARCHAR(50) NOT NULL,
         price_usd FLOAT,
         market_cap FLOAT,
         volume_24h FLOAT,
