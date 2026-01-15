@@ -30,7 +30,7 @@ def verify_db_state():
             print("-" * 40)
             print("🏆 Top 5 Assets by Market Cap:")
             query = """
-            SELECT symbol, price_usd, market_cap, volume_24h, timestamp 
+            SELECT symbol, price, market_cap, volume_24h, timestamp 
             FROM market_data 
             ORDER BY market_cap DESC 
             LIMIT 5;
