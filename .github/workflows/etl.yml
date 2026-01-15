@@ -44,14 +44,15 @@ jobs:
       # If the registry updated (e.g. marked coins inactive), commit it back.
       - name: Commit Registry Updates
         run: |
-          git config --global user.name "Market Sentinel Bot"
-          git config --global user.email "bot@marketsentinel.local"
-          
-          # Check if coin_registry.json changed
-          if [[ `git status --porcelain coin_registry.json` ]]; then
-            git add coin_registry.json
-            git commit -m "auto-heal: update coin registry status [skip ci]"
+          # 2. Check if the registry OR usage log changed
+          if [[ -n $(git status --porcelain coin_registry.json) || -n $(git status --porcelain usage_log.json) ]]; then
+            echo "🧠 Registry or Usage updated. Saving memory..."
+            git add coin_registry.json usage_log.json
+            
+            # 3. Commit and Push
+            # [skip ci] is CRITICAL. It prevents this commit from triggering a new run (infinite loop).
+            git commit -m "auto-heal: update registry & usage stats [skip ci]"
             git push
           else
-            echo "No registry changes to save."
+            echo "💤 No changes to save."
           fi

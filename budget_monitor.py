@@ -35,6 +35,17 @@ def save_run(start_time, end_time):
     # Keep file size small (last 1000 runs only)
     if len(history) > 1000:
         history = history[-1000:]
+
+    # MONTHLY RESET LOGIC
+    # Check if the last entry is from a different month than the new one
+    if len(history) > 1:
+        last_entry_time = datetime.fromisoformat(history[-2]['timestamp'])
+        current_entry_time = start_time
+        
+        if last_entry_time.month != current_entry_time.month:
+            print("🗓️  New Month Detected! Resetting usage log for accurate billing cycle.")
+            # Keep only the current new entry
+            history = [entry]
         
     with open(safe_zone.USAGE_LOG_FILE, 'w') as f:
         json.dump(history, f, indent=2)
