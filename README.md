@@ -4,7 +4,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![CoinGecko](https://img.shields.io/badge/API-CoinGecko-8BC34A?style=for-the-badge&logo=coingecko&logoColor=white)
 ![ETL](https://img.shields.io/badge/Type-ETL_Pipeline-FF4B4B?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Phase_3_Complete-success?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Phase_5_Complete-success?style=for-the-badge)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/zaltark/Automated-Crypto-Bot)
 
 **Level:** Advanced Data Engineering / Infrastructure
@@ -45,7 +45,7 @@
 
 This system follows a robust **Extract-Transform-Load (ETL)** pattern designed for resilience, scalability, and cost-efficiency.
 
-![Market Sentinel Architecture](https://mermaid.ink/img/Z3JhcGggVEQKICAgIHN1YmdyYXBoICIxLiBPcmNoZXN0cmF0aW9uICYgU2FmZXR5IgogICAgICAgIEluZ2VzdFtpbmdlc3QucHldIC0tPnxMb2FkfCBDb25maWdbaW5nZXN0X2NvbmZpZy5qc29uXQogICAgICAgIEluZ2VzdCAtLT58U3luY3wgUmVnaXN0cnlbY29pbl9yZWdpc3RyeS5weV0KICAgICAgICBCdWRnZXRbYnVkZ2V0X21vbml0b3IucHldIC0uLT58TW9uaXRvcnwgSW5nZXN0CiAgICBlbmQKCiAgICBzdWJncmFwaCAiMi4gRXh0cmFjdGlvbiAoQVBJKSIKICAgICAgICBSZWdpc3RyeSAtLT58VGFyZ2V0fCBBUElbYXBpX2xpYnJhcnkucHldCiAgICAgICAgQVBJIC0tPnxGZXRjaHwgQ29pbkdlY2tvW0NvaW5HZWNrbyBBUEldCiAgICBlbmQKCiAgICBzdWJncmFwaCAiMy4gVHJhbnNmb3JtYXRpb24gKExvZ2ljKSIKICAgICAgICBDb2luR2Vja28gLS0+fFJhdyBKU09OfCBUcmFuc2Zvcm1bdHJhbnNmb3JtLnB5XQogICAgICAgIFRyYW5zZm9ybSAtLT58VmFsaWRhdGV8IENsZWFuRGF0YVtDbGVhbiBUdXBsZXNdCiAgICBlbmQKCiAgICBzdWJncmFwaCAiNC4gU3RvcmFnZSAoUG9zdGdyZXMpIgogICAgICAgIENsZWFuRGF0YSAtLT58VXBzZXJ0fCBEQltkYXRhYmFzZS5weV0KICAgICAgICBEQiAtLT58U1FMfCBOZW9uW05lb24gUG9zdGdyZXNdCiAgICAgICAgREIgLS0+fFB1cmdlfCBSZXRlbnRpb25bNjAtRGF5IFJldGVudGlvbl0KICAgIGVuZA==)
+![Market Sentinel Architecture](https://mermaid.ink/img/Z3JhcGggVEQKICAgIHN1YmdyYXBoICIxLiBPcmNoZXN0cmF0aW9uICYgU2FmZXR5IgogICAgICAgIEluZ2VzdFtpbmdlc3QucHldIC0tPnxMb2FkfCBDb25maWdbaW5nZXN0X2NvbmZpZy5qc29uXQogICAgICAgIEluZ2VzdCAtLT58U3luY3wgUmVnaXN0cnlbY29pbl9yZWdpc3RyeS5weV0KICAgICAgICBCdWRnZXRbYnVkZ2V0X21vbml0b3IucHldIC0uLT58TW9uaXRvcnwgSW5nZXN0CiAgICBzdWJncmFwaCAiMi4gRXh0cmFjdGlvbiAoQVBJKSIKICAgICAgICBSZWdpc3RyeSAtLT58VGFyZ2V0fCBBUElbYXBpX2xpYnJhcnkucHldCiAgICAgICAgQVBJIC0tPnxGZXRjaHwgQ29pbkdlY2tvW0NvaW5HZWNrbyBBUEldCiAgICBlbmQKCiAgICBzdWJncmFwaCAiMy4gVHJhbnNmb3JtYXRpb24gKExvZ2ljKSIKICAgICAgICBDb2luR2Vja28gLS0+fFJhdyBKU09OfCBUcmFuc2Zvcm1bdHJhbnNmb3JtLnB5XQogICAgICAgIFRyYW5zZm9ybSAtLT58VmFsaWRhdGV8IENsZWFuRGF0YVtDbGVhbiBUdXBsZXNdCiAgICBlbmQKCiAgICBzdWJncmFwaCAiNC4gU3RvcmFnZSAoUG9zdGdyZXMpIgogICAgICAgIENsZWFuRGF0YSAtLT58VXBzZXJ0fCBEQltkYXRhYmFzZS5weV0KICAgICAgICBEQiAtLT58U1FMfCBOZW9uW05lb24gUG9zdGdyZXNdCiAgICAgICAgREIgLS0+fFB1cmdlfCBSZXRlbnRpb25bNjAtRGF5IFJldGVudGlvbl0KICAgIGVuZA==)
 
 1.  **Orchestrator (`ingest.py`):** The central nervous system. It coordinates the lifecycle, managing configuration, logging, and execution flow.
 2.  **The Registry (`coin_registry.py`):** A smart filter that resolves symbols (e.g., "BTC" -> "bitcoin") and blocks "Ghost Coins" (dead assets) to save API credits.
@@ -53,6 +53,14 @@ This system follows a robust **Extract-Transform-Load (ETL)** pattern designed f
 4.  **Transformation (`transform.py`):** A "Schema Shield" that validates types, ensures non-negative prices, and standardizes timestamps.
 5.  **Loading (`database.py`):** Efficiently upserts data into Cloud SQL (Neon) and enforces a strict 60-day data retention policy.
 6.  **Budget Guard (`budget_monitor.py`):** Tracks execution time and estimates cloud costs to prevent free-tier overages.
+
+## 🌟 Key Feature: Self-Healing Autonomy
+
+The pipeline includes a "Strike System" for asset health:
+1.  **Detection:** If a coin returns garbage data (null prices) 3 times consecutively, it is flagged.
+2.  **Action:** The system marks the coin as `inactive` in `coin_registry.json`.
+3.  **Persistence:** The automation workflow (**GitHub Actions**) automatically commits this registry update back to the repository.
+4.  **Result:** Future runs skip these dead assets, optimizing API usage and processing time automatically.
 
 ## 📂 File Library & Purpose
 
@@ -90,11 +98,13 @@ This system follows a robust **Extract-Transform-Load (ETL)** pattern designed f
 *   **Phase 2: Transformation** - `[COMPLETED]` (Schema Shield, Ghost Coin Guard)
 *   **Phase 3: Storage** - `[COMPLETED]` (Neon Serverless Postgres, Efficient Upserts, Retention Policy)
 *   **Phase 4: Automation** - `[COMPLETED]` (GitHub Actions Cron / Manual Trigger)
-*   **Phase 5: Visualization** - `[PLANNED]` (Plotly Dash)
+*   **Phase 5: Full Autonomy** - `[COMPLETED]` (Self-Healing Registry & Persistent Memory)
+*   **Phase 6: Visualization** - `[PLANNED]` (Plotly Dash)
 
 ## Why this Portfolio Project Wins
 
 *   **Scale:** Managing a rolling 1-million-row dataset proves you understand performance.
 *   **Reliability:** The use of "Upserts", "Circuit Breakers", and "Budget Guards" shows you build systems that don't crash or bankrupt you.
 *   **Automation:** The project runs itself 24/7 without human intervention.
-*   **Full-Stack:** You demonstrate competence in Python, SQL, Cloud Infrastructure, and UI.
+*   **Self-Healing:** The system detects failures, fixes its own configuration, and persists those fixes to the codebase automatically.
+*   **Full-Stack:** You demonstrate competence in Python, SQL, Cloud Infrastructure, and CI/CD pipelines.
